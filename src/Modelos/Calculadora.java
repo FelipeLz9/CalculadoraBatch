@@ -23,8 +23,9 @@ public class Calculadora {
     public void calcular() throws IOException, FileNotFoundException{
         Operacion op = lector.crearOperacion();
         double resultado;
-        if(op.getCONST() == SUMA){
+        if(op.getCONST() == SUMA){  
             resultado = op.operacion(op.getO1(), op.getO2());
+            System.out.println(resultado +"");
             escritor.escribirResultadoEnArchivo(resultado);
         }else if(op.getCONST() == RESTA){
             resultado = op.operacion(op.getO1(), op.getO2());
@@ -54,6 +55,10 @@ public class Calculadora {
      */
     public void setLector(LectorArchivoDeEntrada lector) {
         this.lector = lector;
+    }
+
+    public void setEscritor(EscritorArchivoSalida escritor) {
+        this.escritor = escritor;
     }
     
     

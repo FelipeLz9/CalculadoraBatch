@@ -32,9 +32,10 @@ public class LectorArchivoDeEntrada {
         Operando o2 = null;
         Operacion operacion = null;
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String linea = reader.readLine();
-            String[] elementos = linea.split(" ");
-            try{
+            String linea;
+            while((linea = reader.readLine()) != null){
+                String[] elementos = linea.split(" ");
+                try{
                 if(!elementos[0].equals("ANS") ){
                     double num = Double.parseDouble(elementos[0]);
                     o1 = new Operando(num);
@@ -43,21 +44,20 @@ public class LectorArchivoDeEntrada {
                     double num = Double.parseDouble(elementos[2]);
                     o2 = new Operando(num);
                 }
-                if(!elementos[1].equals("+")){
-                    operacion = new OperacionSuma(o1,o2);
-                }else if(!elementos[1].equals("-")){
-                    operacion = new OperacionResta(o1,o2);
-                }else if(!elementos[1].equals("*")){
-                    operacion = new OperacionMultiplicacion(o1, o2);
-                }else if(!elementos[1].equals("/")){
-                    operacion = new OperacionDivision(o1,o2);
-                }else if(!elementos[1].equals("%")){
-                    operacion = new OperacionModulo(o1, o2);
+                    switch (elementos[1]) {
+                        case "+" -> operacion = new OperacionSuma(o1,o2);
+                        case "-" -> operacion = new OperacionResta(o1,o2);
+                        case "*" -> operacion = new OperacionMultiplicacion(o1, o2);
+                        case "/" -> operacion = new OperacionDivision(o1,o2);
+                        case "%" -> operacion = new OperacionModulo(o1, o2);
+                    }
+                    System.out.println(operacion);
+                    return operacion;
+                }catch(NumberFormatException e){
+                    throw e;
                 }
-                reader.close();
-            }catch(NumberFormatException e){
-                throw e;
             }
+            reader.close();
         }catch(FileNotFoundException e){
             throw e;
         }

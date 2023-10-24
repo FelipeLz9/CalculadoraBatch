@@ -10,7 +10,7 @@ package Modelos;
  */
 public abstract class Operacion {
     
-    protected final int CONST = 0;
+    protected int CONST = 0;
     
     protected Operando o1;
     protected Operando o2;

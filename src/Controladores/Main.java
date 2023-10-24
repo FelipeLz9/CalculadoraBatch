@@ -22,6 +22,8 @@ public class Main {
         v.setCalculadora(c);
         v.setVisible(true);
         v.setLocationRelativeTo(null);
+        EscritorArchivoSalida eas = new EscritorArchivoSalida();
+        c.setEscritor(eas);
     }
     
 }

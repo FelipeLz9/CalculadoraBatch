@@ -10,7 +10,7 @@ package Modelos;
  */
 public class OperacionSuma extends Operacion{
 
-    private final int CONST = 1;
+    private int CONST = 1;
     
     public OperacionSuma(Operando o1, Operando o2){
         super(o1, o2);
@@ -28,4 +28,12 @@ public class OperacionSuma extends Operacion{
         return ans = num1.getNumero() + num2.getNumero();
     }
 
+    /**
+     *
+     * @return CONST
+     */
+    @Override
+    public int getCONST() {
+        return CONST;
+    }
 }
