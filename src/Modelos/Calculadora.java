@@ -20,29 +20,40 @@ public class Calculadora {
     private final int DIVISION = 4;
     private final int MODULO = 5;
 
-    public void calcular() throws IOException, FileNotFoundException{
+    public void calcular() throws IOException {
         Operacion op = lector.crearOperacion();
         double resultado;
-        if(op.getCONST() == SUMA){  
-            resultado = op.operacion(op.getO1(), op.getO2());
-            System.out.println(resultado +"");
-            escritor.escribirResultadoEnArchivo(resultado);
-        }else if(op.getCONST() == RESTA){
-            resultado = op.operacion(op.getO1(), op.getO2());
-            escritor.escribirResultadoEnArchivo(resultado);
-        }else if(op.getCONST() == MULTIPLICACION){
-            resultado = op.operacion(op.getO1(), op.getO2());
-            escritor.escribirResultadoEnArchivo(resultado);
-        }else if(op.getCONST() == DIVISION){
-            resultado = op.operacion(op.getO1(), op.getO2());
-            escritor.escribirResultadoEnArchivo(resultado);
-        }else if(op.getCONST() == MODULO){
-            resultado = op.operacion(op.getO1(), op.getO2());
-            escritor.escribirResultadoEnArchivo(resultado);
-        }else if(op == null){
+
+        if (op != null) {
+            switch (op.getCONST()) {
+                case SUMA -> {
+                    resultado = op.operacion(op.getO1(), op.getO2());
+                    System.out.println(resultado);
+                    escritor.escribirResultadoEnArchivo(Double.toString(resultado));
+                }
+                case RESTA -> {
+                    resultado = op.operacion(op.getO1(), op.getO2());
+                    escritor.escribirResultadoEnArchivo(Double.toString(resultado));
+                }
+                case MULTIPLICACION -> {
+                    resultado = op.operacion(op.getO1(), op.getO2());
+                    escritor.escribirResultadoEnArchivo(Double.toString(resultado));
+                }
+                case DIVISION -> {
+                    resultado = op.operacion(op.getO1(), op.getO2());
+                    escritor.escribirResultadoEnArchivo(Double.toString(resultado));
+                }
+                case MODULO -> {
+                    resultado = op.operacion(op.getO1(), op.getO2());
+                    escritor.escribirResultadoEnArchivo(Double.toString(resultado));
+                }
+                default -> escritor.escribirResultadoEnArchivo("Error");
+            }
+        } else {
             escritor.escribirResultadoEnArchivo("Error");
         }
     }
+
     /**
      * @return the lector
      */

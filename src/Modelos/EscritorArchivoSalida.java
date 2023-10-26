@@ -5,8 +5,11 @@
 package Modelos;
 
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  *
@@ -14,24 +17,19 @@ import java.io.IOException;
  */
 public class EscritorArchivoSalida {
     
-    public void escribirResultadoEnArchivo(double resultado) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Archivo de Salida.txt"))) {
-            writer.write(Double.toString(resultado));
-            writer.newLine();
-            writer.close();
-        } catch (IOException e){
-            throw e;
-        }
-    }
+    Charset charset = Charset.forName("UTF-8");
     
     public void escribirResultadoEnArchivo(String str) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Archivo de Salida.txt"))) {
+               
+        Path outFile = Paths.get("C:\\Users\\lopez\\OneDrive\\Documentos\\ArchivoSalida.txt");
+        
+        try (BufferedWriter writer = Files.newBufferedWriter(outFile, charset)) {
             writer.write(str);
+            writer.newLine();
             writer.close();
-        } catch (IOException e){
+        }catch(IOException e){
             throw e;
         }
     }
     
-
 }

@@ -30,10 +30,11 @@ public class LectorArchivoDeEntrada {
     public Operacion crearOperacion() throws FileNotFoundException, IOException{
         Operando o1 = null;
         Operando o2 = null;
-        Operacion operacion = null;
+        
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String linea;
             while((linea = reader.readLine()) != null){
+                Operacion operacion = null;
                 String[] elementos = linea.split(" ");
                 try{
                 if(!elementos[0].equals("ANS") ){
@@ -51,7 +52,6 @@ public class LectorArchivoDeEntrada {
                         case "/" -> operacion = new OperacionDivision(o1,o2);
                         case "%" -> operacion = new OperacionModulo(o1, o2);
                     }
-                    System.out.println(operacion);
                     return operacion;
                 }catch(NumberFormatException e){
                     throw e;
@@ -61,7 +61,7 @@ public class LectorArchivoDeEntrada {
         }catch(FileNotFoundException e){
             throw e;
         }
-        return operacion;
+        return null;
     }
 
     /**

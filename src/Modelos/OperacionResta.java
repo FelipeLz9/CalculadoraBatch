@@ -10,6 +10,13 @@ package Modelos;
  */
 public class OperacionResta extends Operacion{
 
+    /**
+     * @return the RESTA
+     */
+    public int getRESTA() {
+        return RESTA;
+    }
+
     private final int RESTA = 2;
     
     public OperacionResta(Operando o1, Operando o2) {

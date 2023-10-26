@@ -5,12 +5,8 @@
         <group>
             <file>file:/C:/Users/lopez/OneDrive/Documentos/NetBeansProjects/Calculadora/src/Modelos/Calculadora.java</file>
             <file>file:/C:/Users/lopez/OneDrive/Documentos/NetBeansProjects/Calculadora/src/Modelos/LectorArchivoDeEntrada.java</file>
-            <file>file:/C:/Users/lopez/OneDrive/Documentos/NetBeansProjects/Calculadora/src/Vistas/Ventana.java</file>
             <file>file:/C:/Users/lopez/OneDrive/Documentos/NetBeansProjects/Calculadora/src/Modelos/EscritorArchivoSalida.java</file>
-            <file>file:/C:/Users/lopez/OneDrive/Documentos/NetBeansProjects/Calculadora/src/Modelos/OperacionSuma.java</file>
-            <file>file:/C:/Users/lopez/OneDrive/Documentos/NetBeansProjects/Calculadora/src/Modelos/Operacion.java</file>
-            <file>file:/C:/Users/lopez/OneDrive/Documentos/NetBeansProjects/Calculadora/src/Controladores/Main.java</file>
-            <file>file:/C:/Users/lopez/OneDrive/Documentos/NetBeansProjects/Calculadora/src/Modelos/Operando.java</file>
+            <file>file:/C:/Users/lopez/OneDrive/Documentos/NetBeansProjects/Calculadora/src/Modelos/OperacionResta.java</file>
         </group>
     </open-files>
 </project-private>
