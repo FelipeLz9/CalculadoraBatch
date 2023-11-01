@@ -10,6 +10,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,15 +18,17 @@ import java.nio.file.Paths;
  */
 public class EscritorArchivoSalida {
     
+    Path outFile = Paths.get("C:\\Users\\lopez\\OneDrive\\Documentos\\ArchivoSalida.txt");
     Charset charset = Charset.forName("UTF-8");
     
-    public void escribirResultadoEnArchivo(String str) throws IOException {
+    public void escribirResultadoEnArchivo(ArrayList<String> str) throws IOException {
                
-        Path outFile = Paths.get("C:\\Users\\lopez\\OneDrive\\Documentos\\ArchivoSalida.txt");
-        
         try (BufferedWriter writer = Files.newBufferedWriter(outFile, charset)) {
-            writer.write(str);
-            writer.newLine();
+            for(String s : str){
+                System.out.println(s);
+                writer.write(s);
+                writer.newLine();
+            }
             writer.close();
         }catch(IOException e){
             throw e;

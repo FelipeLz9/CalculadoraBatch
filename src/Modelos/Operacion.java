@@ -10,8 +10,6 @@ package Modelos;
  */
 public abstract class Operacion {
     
-    protected int CONST = 0;
-    
     protected Operando o1;
     protected Operando o2;
     protected double ans;
@@ -21,15 +19,8 @@ public abstract class Operacion {
         this.o2 = o2;
     }
 
-    public abstract double operacion(Operando o1, Operando o2);
+    public abstract double operar();
     
-    /**
-     * @return the CONST
-     */
-    public int getCONST() {
-        return CONST;
-    }
-
     /**
      * @return the o1
      */

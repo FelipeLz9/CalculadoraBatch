@@ -88,8 +88,7 @@ public class Ventana extends javax.swing.JFrame {
             getCalculadora().calcular();
             getCalculadora().calcular();
             JOptionPane.showMessageDialog(this, "Archivo creado");
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "El arhivo seleccionado no se puede abrir.");
+        } catch (IOException | NumberFormatException ex) {
         }
     }
 

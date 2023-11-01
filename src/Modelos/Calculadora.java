@@ -5,6 +5,7 @@
 package Modelos;
 
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,44 +15,19 @@ public class Calculadora {
     
     public LectorArchivoDeEntrada lector;
     private EscritorArchivoSalida escritor;
-    private final int SUMA = 1;
-    private final int RESTA = 2;
-    private final int MULTIPLICACION = 3;
-    private final int DIVISION = 4;
-    private final int MODULO = 5;
 
     public void calcular() throws IOException {
-        Operacion op = lector.crearOperacion();
+        ArrayList<Operacion> ops = lector.crearOperacion();
         double resultado;
+        ArrayList<String> resultados = new ArrayList<>();
 
-        if (op != null) {
-            switch (op.getCONST()) {
-                case SUMA -> {
-                    resultado = op.operacion(op.getO1(), op.getO2());
-                    System.out.println(resultado);
-                    escritor.escribirResultadoEnArchivo(Double.toString(resultado));
-                }
-                case RESTA -> {
-                    resultado = op.operacion(op.getO1(), op.getO2());
-                    escritor.escribirResultadoEnArchivo(Double.toString(resultado));
-                }
-                case MULTIPLICACION -> {
-                    resultado = op.operacion(op.getO1(), op.getO2());
-                    escritor.escribirResultadoEnArchivo(Double.toString(resultado));
-                }
-                case DIVISION -> {
-                    resultado = op.operacion(op.getO1(), op.getO2());
-                    escritor.escribirResultadoEnArchivo(Double.toString(resultado));
-                }
-                case MODULO -> {
-                    resultado = op.operacion(op.getO1(), op.getO2());
-                    escritor.escribirResultadoEnArchivo(Double.toString(resultado));
-                }
-                default -> escritor.escribirResultadoEnArchivo("Error");
+        for(Operacion op : ops){
+            if (op != null) {
+                resultado = op.operar();
+                resultados.add(Double.toString(resultado));
             }
-        } else {
-            escritor.escribirResultadoEnArchivo("Error");
         }
+        escritor.escribirResultadoEnArchivo(resultados);
     }
 
     /**

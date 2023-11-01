@@ -5,6 +5,7 @@
 package Modelos;
 
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -27,9 +28,12 @@ public class LectorArchivoDeEntrada {
      * @throws IOException Si se produce un error de lectura del archivo.
      * @throws NumberFormatException Si los datos en el archivo no son números válidos.
      */
-    public Operacion crearOperacion() throws FileNotFoundException, IOException{
+    public ArrayList<Operacion> crearOperacion() throws FileNotFoundException, IOException{
+        
         Operando o1 = null;
         Operando o2 = null;
+        
+        ArrayList<Operacion> operaciones = new ArrayList<>();
         
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String linea;
@@ -37,13 +41,17 @@ public class LectorArchivoDeEntrada {
                 Operacion operacion = null;
                 String[] elementos = linea.split(" ");
                 try{
-                if(!elementos[0].equals("ANS") ){
-                    double num = Double.parseDouble(elementos[0]);
-                    o1 = new Operando(num);
-                }
-                if(!elementos[2].equals("ANS")){
-                    double num = Double.parseDouble(elementos[2]);
-                    o2 = new Operando(num);
+                    if(!elementos[0].equals("ANS") ){
+                        double num = Double.parseDouble(elementos[0]);
+                        o1 = new Operando(num);
+                    }
+                    if(!elementos[2].equals("ANS")){
+                        double num = Double.parseDouble(elementos[2]);
+                        o2 = new Operando(num);
+                    }
+                }catch(NumberFormatException e){
+                    operaciones.add(null);
+                    throw e;
                 }
                     switch (elementos[1]) {
                         case "+" -> operacion = new OperacionSuma(o1,o2);
@@ -52,16 +60,15 @@ public class LectorArchivoDeEntrada {
                         case "/" -> operacion = new OperacionDivision(o1,o2);
                         case "%" -> operacion = new OperacionModulo(o1, o2);
                     }
-                    return operacion;
-                }catch(NumberFormatException e){
-                    throw e;
+                    if(operacion != null){
+                        operaciones.add(operacion);
+                    }
                 }
-            }
-            reader.close();
+                reader.close();
+            return operaciones;
         }catch(FileNotFoundException e){
             throw e;
         }
-        return null;
     }
 
     /**
