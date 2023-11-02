@@ -21,13 +21,14 @@ public abstract class Operacion {
 
     public abstract double operar();
     
+    
     /**
      * @return the o1
      */
     public Operando getO1() {
         return o1;
     }
-
+    
     /**
      * @param o1 the o1 to set
      */

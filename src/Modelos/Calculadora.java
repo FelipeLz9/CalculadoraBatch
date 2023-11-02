@@ -25,6 +25,8 @@ public class Calculadora {
             if (op != null) {
                 resultado = op.operar();
                 resultados.add(Double.toString(resultado));
+            }else{
+                resultados.add("Error");
             }
         }
         escritor.escribirResultadoEnArchivo(resultados);

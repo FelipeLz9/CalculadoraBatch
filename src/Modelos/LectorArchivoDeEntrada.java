@@ -7,6 +7,7 @@ package Modelos;
 import java.io.*;
 import java.util.ArrayList;
 
+
 /**
  *
  * @author lopez
@@ -28,48 +29,73 @@ public class LectorArchivoDeEntrada {
      * @throws IOException Si se produce un error de lectura del archivo.
      * @throws NumberFormatException Si los datos en el archivo no son números válidos.
      */
-    public ArrayList<Operacion> crearOperacion() throws FileNotFoundException, IOException{
-        
-        Operando o1 = null;
-        Operando o2 = null;
-        
-        ArrayList<Operacion> operaciones = new ArrayList<>();
-        
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String linea;
-            while((linea = reader.readLine()) != null){
-                Operacion operacion = null;
-                String[] elementos = linea.split(" ");
-                try{
-                    if(!elementos[0].equals("ANS") ){
-                        double num = Double.parseDouble(elementos[0]);
-                        o1 = new Operando(num);
-                    }
-                    if(!elementos[2].equals("ANS")){
-                        double num = Double.parseDouble(elementos[2]);
-                        o2 = new Operando(num);
-                    }
-                }catch(NumberFormatException e){
-                    operaciones.add(null);
-                    throw e;
+public ArrayList<Operacion> crearOperacion() throws FileNotFoundException, IOException {
+    ArrayList<Operacion> operaciones = new ArrayList<>();
+    double resultadoAnterior = 0.0; // Variable para almacenar el resultado anterior
+
+    try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+        String linea;
+        while ((linea = reader.readLine()) != null) {
+            Operacion operacion = null;
+            String[] elementos = linea.split(" ");
+
+            if (elementos.length != 3) {
+                operaciones.add(null); // Agrega null si no hay 3 elementos
+                continue; // Salta al siguiente ciclo
+            }
+
+            try {
+                double num1;
+                double num2;
+                if (elementos[0].equals("ANS")) {
+                    num1 = resultadoAnterior; // Usa el resultado anterior
+                } else {
+                    num1 = Double.parseDouble(elementos[0]);
                 }
-                    switch (elementos[1]) {
-                        case "+" -> operacion = new OperacionSuma(o1,o2);
-                        case "-" -> operacion = new OperacionResta(o1,o2);
-                        case "*" -> operacion = new OperacionMultiplicacion(o1, o2);
-                        case "/" -> operacion = new OperacionDivision(o1,o2);
-                        case "%" -> operacion = new OperacionModulo(o1, o2);
-                    }
-                    if(operacion != null){
-                        operaciones.add(operacion);
+
+                if (elementos[2].equals("ANS")) {
+                    num2 = resultadoAnterior; // Usa el resultado anterior
+                } else {
+                    num2 = Double.parseDouble(elementos[2]);
+                }
+
+                Operando o1 = new Operando(num1);
+                Operando o2 = new Operando(num2);
+
+                switch (elementos[1]) {
+                    case "+" -> operacion = new OperacionSuma(o1, o2);
+                    case "-" -> operacion = new OperacionResta(o1, o2);
+                    case "*" -> operacion = new OperacionMultiplicacion(o1, o2);
+                    case "/" -> operacion = new OperacionDivision(o1, o2);
+                    case "%" -> operacion = new OperacionModulo(o1, o2);
+                    default -> {
+                        operaciones.add(null); // Agrega null si el operador no es válido
+                        continue; // Salta al siguiente ciclo
                     }
                 }
-                reader.close();
-            return operaciones;
-        }catch(FileNotFoundException e){
-            throw e;
+
+                if (operacion != null) {
+                    resultadoAnterior = operacion.operar(); // Almacena el resultado en resultadoAnterior
+                }
+            } catch (NumberFormatException e) {
+                operaciones.add(null); // Agrega null si no se pueden convertir a números
+            }
+
+            operaciones.add(operacion);
         }
+    } catch (FileNotFoundException e) {
+        throw e;
+    } catch (IOException e) {
+        throw e;
     }
+    
+    return operaciones;
+}
+
+
+
+
+
 
     /**
      * @return the file
